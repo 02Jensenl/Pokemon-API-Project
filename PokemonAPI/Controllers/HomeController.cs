@@ -11,6 +11,8 @@ namespace PokemonAPI.Controllers
 {
     public class HomeController : Controller
     {
+        public PokemonapiDAL DAL = new PokemonapiDAL();
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -21,6 +23,12 @@ namespace PokemonAPI.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Pokemon(int id)
+        {
+            Pokemon p = DAL.ConvertToPokemonModels(id);
+            return View(p);
         }
 
         public IActionResult Privacy()
