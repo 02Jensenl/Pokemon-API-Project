@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 namespace PokemonAPI.Models
 {
 
-
-
     public class Rootobject
     {
         public string ability { get; set; }

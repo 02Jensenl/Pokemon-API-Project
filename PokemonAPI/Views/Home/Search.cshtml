@@ -1,0 +1,46 @@
+﻿@model Pokemon
+
+<h2>Search Pokemon Database</h2>
+
+<form asp-controller="Home" asp-action="SearchResults">
+    <p>
+        <label asp-for="name">Name: </label>
+        <input asp-for="name" />
+    </p>
+    <p>
+        @*650, no pic; 890 = last Id*@
+        <label asp-for="id">Id: </label>
+        <input asp-for="id" min="1" max="890" />
+    </p>
+    <input type="submit" />
+</form>
+
+<hr/>
+
+<form asp-controller="Home" asp-action="SearchType">
+    <p>
+        <label asp-for="types">Type: </label>
+        <select name="types" id="types">
+            <option value=" "></option>
+            <option value="normal">Normal</option>
+            <option value="fire">Fire</option>
+            <option value="water">Water</option>
+            <option value="grass">Grass</option>
+            <option value="flying">Flying</option>
+            <option value="fighting">Fighting</option>
+            <option value="poison">Poison</option>
+            <option value="electric">Electric</option>
+            <option value="ground">Ground</option>
+            <option value="rock">Rock</option>
+            <option value="psychic">Psychic</option>
+            <option value="ice">Ice</option>
+            <option value="bug">Bug</option>
+            <option value="ghost">Ghost</option>
+            <option value="steel">Steel</option>
+            <option value="dragon">Dragon</option>
+            <option value="dark">Dark</option>
+            <option value="fairy">Fairy</option>
+        </select>
+    </p>
+    <input type="submit" />
+</form>

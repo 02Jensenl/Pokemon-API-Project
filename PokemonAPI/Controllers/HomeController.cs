@@ -13,23 +13,47 @@ namespace PokemonAPI.Controllers
     {
         public PokemonapiDAL DAL = new PokemonapiDAL();
 
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
             return View();
         }
-
-        public IActionResult Pokemon(int id)
+        public IActionResult Search()
         {
-            Pokemon p = DAL.ConvertToPokemonModels(id);
-            return View(p);
+            return View();
         }
+
+        public IActionResult SearchResults(string Name, int Id)
+        {
+            if (!string.IsNullOrWhiteSpace(Name))
+            {
+                string search = Name;
+                SearchBy typeOfSearch = SearchBy.name;
+                Pokemon p = DAL.ConvertToPokemonModels(search, typeOfSearch);
+                return View(p);
+            }
+            else if (Id != 0)
+            {
+                string search = Id.ToString();
+                SearchBy typeOfSearch = SearchBy.id;
+                Pokemon p = DAL.ConvertToPokemonModels(search, typeOfSearch);
+                return View(p);
+            }
+            return View("");
+        }
+        public IActionResult SearchType(string types)
+        {
+            List<Pokemon> selection = new List<Pokemon> { };
+
+            string search = types;
+            SearchBy typeOfSearch = SearchBy.type;
+            selection = DAL.ConvertTypeToPokemonModels(search, typeOfSearch);
+            return View(selection);
+        }
+        //public IActionResult Pokemon(int id)
+        //{
+        //    Pokemon p = DAL.ConvertToPokemonModels(id);
+        //    return View(p);
+        //}
 
         public IActionResult Privacy()
         {
