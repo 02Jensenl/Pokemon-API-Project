@@ -1,13 +1,140 @@
 ﻿@model Pokemon
+@*<h2>@Model.name.ToUpper()</h2>
+    <p><img src="@Model.sprites.other.dream_world.front_default" /></p>
+    <p>Pokedex #@Model.id</p>
+    <p>Height: @Model.height</p>
+    <p>Weight: @Model.weight</p>
+    <p>
+        Type: @for (int i = 0; i < Model.types.Length; i++)
+        {
+        <p>@Model.types[i].type.name</p>
+    }*@
 
-<h2>@Model.name.ToUpper()</h2>
-<p><img src="@Model.sprites.other.dream_world.front_default" /></p>
-<p>Pokedex #@Model.id</p>
-<p>Height: @Model.height</p>
-<p>Weight: @Model.weight</p>
-<p>
-    Type: @for (int i = 0; i < Model.types.Length; i++)
-    {
-    <p>@Model.types[i].type.name</p>
-}
-    </p>
+<link href="../../css/pokemonapiCSS.css" rel="stylesheet" />
+<div id="pokedex">
+    <div id="left">
+        <div id="bg_curve1_left"></div>
+        <div id="bg_curve2_left"></div>
+        <div id="curve1_left">
+            <a asp-controller="Home" asp-action="Index">
+                <div id="buttonGlass">
+                    <div id="reflect"> </div>
+                </div>
+            </a>
+            <div id="miniButtonGlass1"></div>
+            <div id="miniButtonGlass2"></div>
+            <div id="miniButtonGlass3"></div>
+        </div>
+        <div id="curve2_left">
+            <div id="junction">
+                <div id="junction1"></div>
+                <div id="junction2"></div>
+            </div>
+        </div>
+        <div id="screen">
+            <div id="topPicture">
+                <div id="buttontopPicture1"></div>
+                <div id="buttontopPicture2"></div>
+            </div>
+            <a asp-action="Search">
+                <div id="picture">
+                    <img src="@Model.sprites.front_default" height="170" />
+                </div>
+            </a>
+            <div id="buttonbottomPicture"></div>
+            <div id="speakers">
+                <div class="sp"></div>
+                <div class="sp"></div>
+                <div class="sp"></div>
+                <div class="sp"></div>
+            </div>
+        </div>
+        <div id="bigbluebutton"></div>
+        <div id="barbutton1"></div>
+        <div id="barbutton2"></div>
+        <div id="cross">
+            <div id="leftcross">
+                <div id="leftT"></div>
+            </div>
+            <div id="topcross">
+                <div id="upT"></div>
+            </div>
+            <div id="rightcross">
+                <div id="rightT"></div>
+            </div>
+            <div id="midcross">
+                <div id="midCircle"></div>
+            </div>
+            <div id="botcross">
+                <div id="downT"></div>
+            </div>
+        </div>
+    </div>
+    <div id="right">
+        <div id="stats">
+            <strong>Name:</strong> @Model.name.ToUpper()<br />
+            <strong>Pokedex #:</strong> @Model.id<br />
+            <strong>Type:</strong>
+            @if (Model.types.Length > 1)
+            {
+                @for (int i = 0; i < Model.types.Length; i++)
+                {
+                    if (i == Model.types.Length - 1)
+                    {
+                        <body>
+                            @Model.types[i].type.name
+                        </body>
+                    }
+                    else
+                    {
+                        <body>
+                            @Model.types[i].type.name,
+                        </body>
+                    }
+                }
+            }
+
+            else
+            {
+                @Model.types[0].type.name;
+            }
+            <br />
+            <strong>Height:</strong> @Math.Round(@Model.height * .328, 2) ft.<br />
+            <strong>Weight:</strong> @Math.Round(@Model.weight * .22, 2) lbs.<br /><br />
+
+        </div>
+        <div id="blueButtons1">
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+        </div>
+        <div id="blueButtons2">
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+        </div>
+        <div id="miniButtonGlass4"></div>
+        <div id="miniButtonGlass5"></div>
+        <div id="barbutton3"></div>
+        <div id="barbutton4"></div>
+        <form asp-action="AddToFavorites" asp-controller="Favorites" method="post">
+            <input hidden name="PokedexNumber" value="@Model.id" />
+            <input hidden name="Name" value="@Model.name" />
+            <input hidden name="Type" value="@Model.types[0].type.name" />
+            <input hidden name="Height" value="@Model.height" />
+            <input hidden name="Weight" value="@Model.weight" />
+            <div id="greyBox1"><div id="greyBox1Text2">Favorite  <input type="image"<img src="https://www.clipartmax.com/png/middle/226-2265441_download-beating-pink-heart-emoji-icon-baby-pink-love-heart.png" height="10" /></div></div>
+        </form>
+        <a asp-action="Index" asp-controller="Favorites">
+            <div id="greyBox2"><div id="greyBox2Text2">See All Favorites</div></div>
+        </a>
+        <div id="bg_curve1_right"></div>
+        <div id="bg_curve2_right"></div>
+        <div id="curve1_right"></div>
+        <div id="curve2_right"></div>
+    </div>
+</div>

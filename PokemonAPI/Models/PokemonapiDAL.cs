@@ -93,5 +93,34 @@ namespace PokemonAPI.Models
             }
             return p;
         }
+        // // //
+        public string GetFavPokemon(int id)
+        {
+            string endpoint = $"https://pokeapi.co/api/v2/pokemon/{id}";
+
+            HttpWebRequest request = WebRequest.CreateHttp(endpoint);
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            StreamReader rd = new StreamReader(response.GetResponseStream());
+
+            string output = rd.ReadToEnd();
+
+            return output;
+
+        }
+      
+        
+       
+        public Pokemon ConvertToPokemonModelsFav(int id)
+        {
+            string pokemonData = GetFavPokemon(id);
+            Pokemon p = JsonConvert.DeserializeObject<Pokemon>(pokemonData);
+
+            return p;
+
+        }
+        ////////
+
     }
 }

@@ -24,21 +24,28 @@ namespace PokemonAPI.Controllers
 
         public IActionResult SearchResults(string Name, int Id)
         {
-            if (!string.IsNullOrWhiteSpace(Name))
-            {
-                string search = Name;
-                SearchBy typeOfSearch = SearchBy.name;
-                Pokemon p = DAL.ConvertToPokemonModels(search, typeOfSearch);
-                return View(p);
-            }
-            else if (Id != 0)
-            {
-                string search = Id.ToString();
-                SearchBy typeOfSearch = SearchBy.id;
-                Pokemon p = DAL.ConvertToPokemonModels(search, typeOfSearch);
-                return View(p);
-            }
-            return View("");
+                if (!string.IsNullOrWhiteSpace(Name))
+                {
+                    try
+                    {
+                        string search = Name;
+                        SearchBy typeOfSearch = SearchBy.name;
+                        Pokemon p = DAL.ConvertToPokemonModels(search, typeOfSearch);
+                        return View(p);
+                    }
+                    catch
+                    {
+                        return View("Search");
+                    }
+                }
+                else if (Id != 0)
+                {
+                    string search = Id.ToString();
+                    SearchBy typeOfSearch = SearchBy.id;
+                    Pokemon p = DAL.ConvertToPokemonModels(search, typeOfSearch);
+                    return View(p);
+                }
+                return View("");
         }
         public IActionResult SearchType(string types)
         {
@@ -47,14 +54,18 @@ namespace PokemonAPI.Controllers
             string search = types;
             SearchBy typeOfSearch = SearchBy.type;
             selection = DAL.ConvertTypeToPokemonModels(search, typeOfSearch);
+
+            string type = $"{search.Substring(0, 1).ToUpper()}{search.Substring(1)}";
+            ViewBag.Type = type;
             return View(selection);
         }
-        //public IActionResult Pokemon(int id)
-        //{
-        //    Pokemon p = DAL.ConvertToPokemonModels(id);
-        //    return View(p);
-        //}
-
+        // // // 
+        public IActionResult PokemonFav(int id)
+        {
+            Pokemon p = DAL.ConvertToPokemonModelsFav(id);
+            return View(p);
+        }
+        // // //
         public IActionResult Privacy()
         {
             return View();

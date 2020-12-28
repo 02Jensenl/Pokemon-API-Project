@@ -1,23 +1,21 @@
 ﻿@model Pokemon
 
-<h2>Search Pokemon Database</h2>
+<h2 style="text-align: center;">Search Pokemon Database</h2>
 
-<form asp-controller="Home" asp-action="SearchResults">
+<hr />
+<form asp-controller="Home" asp-action="SearchResults" style="text-align: center;">
     <p>
         <label asp-for="name">Name: </label>
         <input asp-for="name" />
     </p>
     <p>
-        @*650, no pic; 890 = last Id*@
         <label asp-for="id">Id: </label>
         <input asp-for="id" min="1" max="890" />
     </p>
-    <input type="submit" />
+    <input class="btn-outline-primary" type="submit" value="Search By Name or ID" />
 </form>
-
-<hr/>
-
-<form asp-controller="Home" asp-action="SearchType">
+<hr />
+<form asp-controller="Home" asp-action="SearchType" style="text-align: center;">
     <p>
         <label asp-for="types">Type: </label>
         <select name="types" id="types">
@@ -42,5 +40,6 @@
             <option value="fairy">Fairy</option>
         </select>
     </p>
-    <input type="submit" />
+    <input class="btn-outline-primary" type="submit" value="Search By Type" />
 </form>
+<hr />

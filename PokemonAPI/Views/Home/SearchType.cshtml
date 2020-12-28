@@ -1,16 +1,19 @@
 ﻿@model List<Pokemon>
 
+<h2 style="text-align: center;">@ViewBag.Type Pokemon </h2>
+<hr />
+
 <table style="margin: 0 auto;" border="1">
     <tr>
         <th style="text-align: center;">Name</th>
-        <th style="text-align: center;"></th>
+        <th style="text-align: center; padding: 2px 7px 2px 7px;">More Information</th>
 
     </tr>
     @foreach (Pokemon p in Model.Where(pokemon => pokemon.id < 891))
     {
         <tr>
-            <td style="text-align: center;">@p.name.ToUpper()</td>
-            <td style="text-align: center; padding: 2px 7px 2px 7px;"><form asp-action="SearchResults"><input type="hidden" name="id" value="@p.id" /><button class="btn-secondary">More Info</button></form></td>
+            <td style="text-align: center; padding: 2px 7px 2px 7px;">@p.name.ToUpper()</td>
+            <td style="text-align: center; "><form asp-action="SearchResults"><input type="hidden" name="id" value="@p.id" /><button class="btn-outline-warning">More Info</button></form></td>
         </tr>
     }
 </table>

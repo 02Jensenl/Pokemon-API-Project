@@ -1,6 +1,6 @@
 ﻿@model Pokemon
 
-<h2>@Model.name.ToUpper()</h2>
+@*<h2>@Model.name.ToUpper()</h2>
 <p><img src="@Model.sprites.other.dream_world.front_default" /></p>
 <p>Pokedex #@Model.id</p>
 <p>Height: @Model.height</p>
@@ -9,5 +9,4 @@
     Type: @for (int i = 0; i < Model.types.Length; i++)
     {
     <p>@Model.types[i].type.name</p>
-}
-    </p>
+}*@
